@@ -18,11 +18,9 @@ public class MovieConstants {
 
     public static final String FETCH_POPULAR_MOVIES = "popularity";
     public static final String FETCH_TOPRATED_MOVIES = "vote_average";
-    public static final String MOVIE_BASE_URL = "https://api.themoviedb.org/3/discover/movie?sort_by=";
-    public static final String ENG_LANG = "&language=en";
+    public static final String MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie/";
     public static final String API_KEY = "api_key";
     public static final String KEY = BuildConfig.THE_MOVIE_DATABASE_API_KEY;
-    public static final String DESC_ORDER = ".desc";
 
     // Json fields required
     public static final String MOVIEDB_RESULTS = "results";
@@ -35,13 +33,14 @@ public class MovieConstants {
     public static final String MOVIEDB_TITLE = "title";
     public static final String MOVIEDB_ORIGINAL_TITLE = "original_title";
     public static final String MOVIEDB_VOTE_AVERAGE = "vote_average";
-    public static final String MOVIEDB_VOTE_COUNT = "vote_count";
+    public static final String MOVIEDB_POPULAR_URL = "popular";
+    public static final String MOVIEDB_TOPRATED_URL = "top_rated";
 
     public static String getBaseUrlFor(String sortBy){
        if(sortBy == FETCH_POPULAR_MOVIES){
-           return MOVIE_BASE_URL + FETCH_POPULAR_MOVIES;
+           return MOVIE_BASE_URL + MOVIEDB_POPULAR_URL;
        }else{
-           return MOVIE_BASE_URL + FETCH_TOPRATED_MOVIES;
+           return MOVIE_BASE_URL + MOVIEDB_TOPRATED_URL;
        }
     }
 

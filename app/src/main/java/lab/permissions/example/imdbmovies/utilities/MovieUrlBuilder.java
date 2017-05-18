@@ -13,23 +13,18 @@ import lab.permissions.example.imdbmovies.data.MovieConstants;
 
 public class MovieUrlBuilder {
     private static final String TAG = "MovieUrlBuilder";
-
     public static URL buildUrl(String sortBy) {
-        String fetch_base_url = MovieConstants.getBaseUrlFor(sortBy) + MovieConstants.DESC_ORDER + MovieConstants.ENG_LANG;
-
+        String fetch_base_url = MovieConstants.getBaseUrlFor(sortBy);
         Uri builtUri = Uri.parse(fetch_base_url).buildUpon()
                 .appendQueryParameter(MovieConstants.API_KEY, MovieConstants.KEY)
                 .build();
-
         URL url = null;
         try {
             url = new URL(builtUri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
         Log.v(TAG, "Built URI " + url.toString());
-
         return url;
     }
 }

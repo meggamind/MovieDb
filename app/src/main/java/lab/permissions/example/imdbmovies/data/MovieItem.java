@@ -1,6 +1,9 @@
 package lab.permissions.example.imdbmovies.data;
 
+import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.method.MovementMethod;
+import android.util.Log;
 
 import java.io.Serializable;
 
@@ -8,7 +11,7 @@ import java.io.Serializable;
  * Created by aniket on 5/14/17.
  */
 
-public class MovieItem implements Serializable{
+public class MovieItem implements Parcelable {
     private String title;
     private String movie_poster;
     private String movie_backdrop;
@@ -16,6 +19,55 @@ public class MovieItem implements Serializable{
     private float vote_average;
     private String release_date;
     private String original_title;
+
+
+    public MovieItem(Parcel in) {
+        title = in.readString();
+        movie_poster = in.readString();
+        movie_backdrop = in.readString();
+        movie_overview = in.readString();
+        vote_average = in.readFloat();
+        release_date = in.readString();
+        original_title = in.readString();
+    }
+
+    public MovieItem(){
+
+    }
+
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(movie_poster);
+        dest.writeString(movie_backdrop);
+        dest.writeString(movie_overview);
+        dest.writeFloat(vote_average);
+        dest.writeString(release_date);
+        dest.writeString(original_title);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<MovieItem> CREATOR
+            = new Parcelable.Creator<MovieItem>() {
+
+        @Override
+        public MovieItem createFromParcel(Parcel in) {
+            return new MovieItem(in);
+        }
+
+        @Override
+        public MovieItem[] newArray(int size) {
+            return new MovieItem[size];
+        }
+    };
+
+
+
+
 
     public String getTitle(){return title;}
     public void setTitle(String title){

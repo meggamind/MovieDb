@@ -34,7 +34,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     public interface MovieAdapterOnClickHandler{
         void onClick(MovieItem movieSelected);
     }
-
     // Add custom onClickListener as a parameter to the constructor
     public MovieAdapter(Context context, MovieAdapterOnClickHandler clickHandler){
         mContext = context;
@@ -43,7 +42,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         mScreenWidth = metrics.widthPixels;
         mScreenHeight = metrics.heightPixels;
     }
-
 
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final ImageView mPosterImage;
@@ -80,13 +78,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public void onBindViewHolder(MovieAdapterViewHolder movieAdapterViewHolder, int position){
-        String movieData = mMovieItems[position].getTitle();
-
-        GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) movieAdapterViewHolder.mMovieItemLayout.getLayoutParams();
-        params.width = mScreenWidth/2 ;
-        params.height = mScreenHeight/2;
-        movieAdapterViewHolder.mMovieItemLayout.setLayoutParams(params);
-
         Picasso.with(mContext)
                 .load("http://image.tmdb.org/t/p/w185/" + mMovieItems[position].getMovie_poster())
                 .error(R.drawable.ic_no_wifi)

@@ -1,53 +1,36 @@
 package lab.permissions.example.imdbmovies;
 
-import android.content.Intent;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.StyleSpan;
-import android.util.Log;
-import android.widget.ImageView;
+import butterknife.BindView;
+import android.content.Intent;
 import android.widget.TextView;
-
+import butterknife.ButterKnife;
+import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import lab.permissions.example.imdbmovies.data.MovieConstants;
+import android.support.v7.app.AppCompatActivity;
 import lab.permissions.example.imdbmovies.data.MovieItem;
+import lab.permissions.example.imdbmovies.data.MovieConstants;
 
 /**
  * Created by aniket on 5/13/17.
  */
 
-public class MovieSelected extends AppCompatActivity {
-    private ImageView mMovieThumbnail;
-    private ImageView mBackdrop;
-    private TextView mOverView;
-    private TextView mVote_average;
-    private TextView mRelease_date;
-    private TextView mOriginal_title;
-
+public class MovieSelectedActivity extends AppCompatActivity {
+    @BindView(R.id.movie_thumbnail) ImageView mMovieThumbnail;
+    @BindView(R.id.backdrop) ImageView mBackdrop;
+    @BindView(R.id.overview) TextView mOverView;
+    @BindView(R.id.vote_average) TextView mVote_average;
+    @BindView(R.id.release_date) TextView mRelease_date;
+    @BindView(R.id.original_title) TextView mOriginal_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_selected);
-
-        mMovieThumbnail = (ImageView)findViewById(R.id.movie_thumbnail);
-        mOverView = (TextView)findViewById(R.id.overview);
-        mOriginal_title = (TextView) findViewById(R.id.original_title);
-        mBackdrop = (ImageView) findViewById(R.id.backdrop);
-
-        mVote_average = (TextView)findViewById(R.id.vote_average);
-        mRelease_date = (TextView)findViewById(R.id.release_date);
+        ButterKnife.bind(this);
 
         Intent intentThatStartedThisActivity = getIntent();
-        MovieItem mMovieItem = (MovieItem) intentThatStartedThisActivity.getSerializableExtra("movieItemSelected");
-
-        Log.i("Aniket", "backdrop: " + mMovieItem.getMovie_backdrop());
+        MovieItem mMovieItem = (MovieItem) intentThatStartedThisActivity.getParcelableExtra("movieItemSelected");
 
         Picasso.with(getApplicationContext())
                 .load("http://image.tmdb.org/t/p/w185/\\" + mMovieItem.getMovie_backdrop())
